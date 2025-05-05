@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 const Hero = () => {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Cercle lumineux centré, plus petit */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-br from-secondary/30 to-accent/30 rounded-full blur-3xl opacity-80 pointer-events-none"></div>
 
       <div className="w-full text-center relative z-10 px-4">
