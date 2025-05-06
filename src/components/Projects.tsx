@@ -23,7 +23,8 @@ const Projects = () => {
     const loadProjects = async () => {
       try {
         const repos = await fetchGitHubRepos('yanis-lannabi');
-        setProjects(repos);
+        const filteredRepos = repos.filter(repo => repo.name !== 'yanis-lannabi');
+        setProjects(filteredRepos);
       } catch (err) {
         setError('Impossible de charger les projets');
         console.error(err);
@@ -84,7 +85,7 @@ const Projects = () => {
                     {project.name}
                   </h3>
                   <p className="text-textSecondary mb-4">
-                    {project.description || 'Aucune description disponible'}
+                    {project.description || ''}
                   </p>
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.topics.map((topic) => (
