@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from 'emailjs-com';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,25 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+
+    emailjs.send(
+      'service_cvrr67w',   
+      'template_1i704yd', 
+      {
+        from_name: formData.name,
+        reply_to: formData.email,
+        message: formData.message,
+      },
+      'ImyLsUU3qd5awQlZM'      
+    )
+    .then((result) => {
+      alert('Message envoyé avec succès !');
+      console.log(result.text);
+      setFormData({ name: '', email: '', message: '' });
+    }, (error) => {
+      alert('Une erreur est survenue. Réessaie plus tard.');
+      console.error(error.text);
+    });
   };
 
   const handleChange = (
@@ -37,10 +56,7 @@ const Contact = () => {
           <div className="bg-tertiary rounded-lg p-8">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium mb-2"
-                >
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
                   Nom
                 </label>
                 <input
@@ -55,10 +71,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium mb-2"
-                >
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
                   Email
                 </label>
                 <input
@@ -73,10 +86,7 @@ const Contact = () => {
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium mb-2"
-                >
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
                   Message
                 </label>
                 <textarea
@@ -90,10 +100,7 @@ const Contact = () => {
                 />
               </div>
 
-              <button
-                type="submit"
-                className="btn w-full"
-              >
+              <button type="submit" className="btn w-full">
                 Envoyer
               </button>
             </form>
@@ -104,4 +111,4 @@ const Contact = () => {
   );
 };
 
-export default Contact; 
+export default Contact;
